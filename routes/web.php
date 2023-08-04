@@ -44,3 +44,18 @@ Route::get('/pelicula/{titulo?}/{year?}', function ($titulo = 'No hay una pelicu
     'titulo' => '[a-zA-Z]+',
     'year' => '[0-9]+'
 ));
+
+//Route listado de peliculas
+Route::get('/listado-peliculas', function () {
+    $titulo = "Listado de peliculas";
+    $listado = array('Batman', 'Spiderman', 'Gran Torino');
+    return view('peliculas.listado')
+        ->with('titulo', $titulo)
+        ->with('listado', $listado);
+});
+
+//Route pagina
+Route::get('/pagina-generica', function () {
+    return view('pagina');
+});
+
