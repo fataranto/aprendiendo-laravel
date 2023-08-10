@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PeliculaController;  // Importamos el controlador (NO SE UTILIZA EN EL CURSO)
 
 /*
 |--------------------------------------------------------------------------
@@ -17,6 +18,18 @@ Route::get('/', function () {
     echo "<h1>Hello World</h1>";
 });
 
+//Route::get('/peliculas', ['PeliculaController@index']); //ESTE MÉTODO NO FUNCIONA
+//Route::get('/peliculas', 'App\Http\Controllers\PeliculaController@index'); //si utilizo esta forma, NO necesito importar el controlador
+Route::get('/peliculas/{pagina?}', [PeliculaController::class, 'index']); //si utilizo esta forma, SI necesito importar el controlador
+
+Route::get('/detalle/{year?}', [
+    'middleware' => 'testyear',
+    'uses' => 'App\Http\Controllers\PeliculaController@detalle'
+]);
+
+//Route::resource('/usuario', 'App\Http\Controllers\UsuarioController');
+
+Route::get('/redirigir', [PeliculaController::class, 'redirigir']);
 
 /*
 GET: CONSEGUIR DATOS
@@ -26,6 +39,7 @@ DELETE: ELIMINAR RECURSOS
 
 */
 
+/*
 Route::get('/mostrar-fecha', function () {
     $titulo = "Estoy mostrando la fecha";
     return view('mostrar-fecha', array(
@@ -59,3 +73,4 @@ Route::get('/pagina-generica', function () {
     return view('pagina');
 });
 
+*/
